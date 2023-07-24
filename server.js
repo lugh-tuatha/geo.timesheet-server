@@ -1,9 +1,15 @@
 const express = require('express');
 const app = express();
-const port = 9000;
-
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
+const colors = require('colors')
+const dotenv = require('dotenv').config();
+
+const port = process.env.PORT;
+const connectDB = require('./config/db')
+
+connectDB()
+
 
 
 // app.listen(9000, function check(error){
@@ -31,3 +37,5 @@ app.post('/api/login', (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`)
 })
+
+app.use('/api/training', require('./routes/trainingRoutes'))
