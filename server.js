@@ -19,8 +19,6 @@ app.post("/api/login", (req, res) => {
 
 app.use("/api/v1/trainings", require("./routes/trainingsRoutes"));
 
-app.use("/api/v1/trainings", require("./routes/trainingsRoutes"));
-
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });

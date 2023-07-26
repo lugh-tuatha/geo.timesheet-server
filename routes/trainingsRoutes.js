@@ -1,9 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { getTrainings, postTrainings } = require('../controllers/trainingsController')
+const {
+  getTrainings,
+  postTrainings,
+  deleteTrainings,
+} = require("../controllers/trainingsController");
 
-router.get('/', getTrainings)
+router.get("/", getTrainings);
 
-router.post('/', postTrainings)
+router.post("/", postTrainings);
+
+router.delete("/:id", deleteTrainings);
 
 module.exports = router;

@@ -30,7 +30,22 @@ const postTrainings = (req, res) => {
   });
 };
 
+const deleteTrainings = (req, res) => {
+  if(req.params.id * 1 > trainings.length){
+    return res.status(404).json({
+      status: 'fail',
+      message: 'invalid id',
+    })
+  }
+
+  res.status(204).json({
+    status: "success",
+    data: null
+  });
+};
+
 module.exports = {
   getTrainings,
   postTrainings,
+  deleteTrainings,
 };
