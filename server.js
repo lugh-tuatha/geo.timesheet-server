@@ -7,6 +7,8 @@ mongoose.set("strictQuery", false);
 const colors = require("colors");
 const dotenv = require("dotenv").config();
 
+const Training = require('./model/trainingSchema')
+
 const port = process.env.PORT;
 const connectDB = require("./config/db");
 
