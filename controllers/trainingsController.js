@@ -1,5 +1,5 @@
 const fs = require("fs");
-
+const Training = require('../model/trainingSchema')
 const trainingsData = `${__dirname}/../dev-data/data/trainings.json`;
 
 const trainings = JSON.parse(fs.readFileSync(trainingsData));
@@ -14,20 +14,22 @@ const getTrainings = (req, res) => {
   });
 };
 
-const postTrainings = (req, res) => {
-  const newId = trainings[trainings.length - 1].id + 1;
-  const newTrainings = Object.assign({ id: newId }, req.body);
+const postTrainings = async (req, res) => {
+  try{
+    const newTraining = await Training.create(req.body);
 
-  trainings.push(newTrainings);
-
-  fs.writeFile(trainingsData, JSON.stringify(trainings), (err) => {
     res.status(201).json({
       status: "success",
       data: {
-        trainings: newTrainings,
+        trainings: newTraining,
       },
     });
-  });
+  }catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err
+    })
+  }
 };
 
 const deleteTrainings = (req, res) => {

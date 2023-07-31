@@ -1,7 +1,10 @@
 const { default: mongoose } = require("mongoose")
 
 const trainingSchema = new mongoose.Schema({
-  type: String,
+  type: {
+    type: String,
+    required: [true, 'A training myst have a type']
+  },
   cover: String,
   date: String,
   duration: Number,
