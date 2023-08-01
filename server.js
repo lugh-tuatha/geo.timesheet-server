@@ -21,7 +21,7 @@ app.post("/api/login", (req, res) => {
   res.redirect("http://localhost:4200/timesheet/");
 });
 
-app.use("/api/v1/trainings", require("./routes/trainingsRoutes"));
+app.use("/geo/api/v1/trainings", require("./routes/trainingsRoutes"));
 
 app.use("/geo/api/v1/timesheet", require('./routes/timesheetRoutes'))
 
