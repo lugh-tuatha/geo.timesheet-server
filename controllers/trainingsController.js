@@ -4,14 +4,23 @@ const trainingsData = `${__dirname}/../dev-data/data/trainings.json`;
 
 const trainings = JSON.parse(fs.readFileSync(trainingsData));
 
-const getTrainings = (req, res) => {
-  res.status(200).json({
-    status: "success",
-    results: trainings.length,
-    data: {
-      trainings,
-    },
-  });
+const getTrainings = async (req, res) => {
+  try{
+    const findTrainings = await Training.find();
+
+    res.status(200).json({
+      status: "success",
+      results: findTrainings.length,
+      data: {
+        findTrainings,
+      },
+    });
+  }catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    })
+  }
 };
 
 const postTrainings = async (req, res) => {
@@ -32,22 +41,46 @@ const postTrainings = async (req, res) => {
   }
 };
 
-const deleteTrainings = (req, res) => {
-  if(req.params.id * 1 > trainings.length){
-    return res.status(404).json({
+const updateTrainings = async (req, res) => {
+  try{
+    const training = await Training.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    })
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        training
+      }
+    });
+  }catch (err){
+    res.status(404).json({
       status: 'fail',
-      message: 'invalid id',
+      message: err
+    })
+  };
+}
+
+const deleteTrainings = async (req, res) => {
+  try{
+    await Training.findByIdAndDelete(req.params.id);
+
+    res.status(204).json({
+      status: "success",
+      data: null
+    });
+  }catch (err){
+    res.status(404).json({
+      status: 'fail',
+      message: err
     })
   }
-
-  res.status(204).json({
-    status: "success",
-    data: null
-  });
 };
 
 module.exports = {
   getTrainings,
   postTrainings,
   deleteTrainings,
+  updateTrainings,
 };
