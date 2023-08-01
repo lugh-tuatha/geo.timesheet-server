@@ -23,6 +23,8 @@ app.post("/api/login", (req, res) => {
 
 app.use("/api/v1/trainings", require("./routes/trainingsRoutes"));
 
+app.use("/geo/api/v1/timesheet", require('./routes/timesheetRoutes'))
+
 app.get(apptivoLinks, (req, res) => {
   res.status(200).json({
     status: 'success',

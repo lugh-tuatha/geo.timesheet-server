@@ -4,11 +4,14 @@ const {
   getTrainings,
   postTrainings,
   deleteTrainings,
+  updateTrainings,
 } = require("../controllers/trainingsController");
 
 router.get("/", getTrainings);
 
 router.post("/", postTrainings);
+
+router.patch("/:id", updateTrainings)
 
 router.delete("/:id", deleteTrainings);
 
