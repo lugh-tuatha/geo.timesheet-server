@@ -1,8 +1,5 @@
 const fs = require("fs");
 const Training = require('../model/trainingSchema')
-const trainingsData = `${__dirname}/../dev-data/data/trainings.json`;
-
-const trainings = JSON.parse(fs.readFileSync(trainingsData));
 
 const getTrainings = async (req, res) => {
   try{

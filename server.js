@@ -7,12 +7,12 @@ mongoose.set("strictQuery", false);
 const colors = require("colors");
 const dotenv = require("dotenv").config();
 
+const axios = require('axios');
+
 const Training = require('./model/trainingSchema')
 
 const port = process.env.PORT;
 const connectDB = require("./config/db");
-
-const apptivoLinks = `https://api2.apptivo.com/app/dao/v6/workorders?a=getAllByAdvancedSearch&searchData=&apiKey=xnyRZVZUXTwz-YEShGzUNTxIjFH-56443bf5-6452-4259-ab1d-4d0af26fa371&accessKey=8cO9v570522y5o666iUsY2gn3uxoC783`;
 
 connectDB();
 
@@ -25,12 +25,23 @@ app.use("/geo/api/v1/trainings", require("./routes/trainingsRoutes"));
 
 app.use("/geo/api/v1/timesheet", require('./routes/timesheetRoutes'))
 
-app.get(apptivoLinks, (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    res
-  })
-})
+app.get("/geo/api/apptivo/work-orders", async (req, res) => {
+  const apptivoLinks = `https://api2.apptivo.com/app/dao/v6/workorders?a=getAllByAdvancedSearch&searchData=&apiKey=${process.env.APPTIVO_API_KEY}&accessKey=${process.env.APPTIVO_ACCESS_KEY}`;
+
+  try {
+    const response = await axios.get(apptivoLinks);
+
+    res.status(200).json({
+      status: 'success',
+      response: response.data
+    })
+  }catch (err){
+    res.status(404).json({
+      status: 'fail',
+      message: err.message,
+    })
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
