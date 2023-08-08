@@ -9,7 +9,8 @@ const dotenv = require("dotenv").config();
 
 const axios = require('axios');
 
-const Training = require('./model/trainingSchema')
+const cors = require('cors');
+app.use(cors())
 
 const port = process.env.PORT;
 const connectDB = require("./config/db");

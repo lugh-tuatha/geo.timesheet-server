@@ -7,20 +7,18 @@ const timesheetSchema = new mongoose.Schema({
   isND: Boolean,
   date: {
     type: String,
-    required: [true, 'must have date'],
+    default: '08/09/23',
+  },
+  location: {
+    type: String,
+    default: 'OFC-DW',
   },
   project: {
     type: String,
     default: 'GEO',
   },
-  task: {
-    type: String,
-    required: [true, 'must have task'],
-  },
-  actualHours: {
-    type: Number,
-    required: [true, 'must have actual hours'],
-  },
+  task: String,
+  actualHours: Number,
   projectDescription: String,
   weekNo: Number,
 })

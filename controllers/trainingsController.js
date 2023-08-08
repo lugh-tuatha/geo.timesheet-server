@@ -1,12 +1,15 @@
 const fs = require("fs");
 const Training = require('../model/trainingSchema')
 
+const { ERROR } = require('../constants/shared/error')
+const { SUCCESS } = require('../constants/shared/success')
+
 const getTrainings = async (req, res) => {
   try{
     const findTrainings = await Training.find();
 
     res.status(200).json({
-      status: "success",
+      status: SUCCESS.RESPONSES.SUCCESS,
       results: findTrainings.length,
       data: {
         findTrainings,
@@ -14,8 +17,8 @@ const getTrainings = async (req, res) => {
     });
   }catch (err) {
     res.status(404).json({
-      status: 'fail',
-      message: err
+      status: ERROR.API_ERROR_404,
+      message: err.message
     })
   }
 };
@@ -25,15 +28,15 @@ const postTrainings = async (req, res) => {
     const newTraining = await Training.create(req.body);
 
     res.status(201).json({
-      status: "success",
+      status: SUCCESS.RESPONSES.CREATE,
       data: {
         trainings: newTraining,
       },
     });
   }catch (err) {
     res.status(400).json({
-      status: 'fail',
-      message: err
+      status: ERROR.API_ERROR_404,
+      message: err.message
     })
   }
 };
@@ -46,15 +49,15 @@ const updateTrainings = async (req, res) => {
     })
 
     res.status(200).json({
-      status: 'success',
+      status: SUCCESS.RESPONSES.UPDATE,
       data: {
         training
       }
     });
   }catch (err){
     res.status(404).json({
-      status: 'fail',
-      message: err
+      status: ERROR.API_ERROR_404,
+      message: err.message
     })
   };
 }
@@ -64,13 +67,13 @@ const deleteTrainings = async (req, res) => {
     await Training.findByIdAndDelete(req.params.id);
 
     res.status(204).json({
-      status: "success",
+      status: SUCCESS.RESPONSES.DELETE,
       data: null
     });
   }catch (err){
     res.status(404).json({
-      status: 'fail',
-      message: err
+      status: ERROR.API_ERROR_404,
+      message: err.message
     })
   }
 };

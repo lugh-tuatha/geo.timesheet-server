@@ -1,12 +1,15 @@
 const Timesheet = require('../model/timesheetSchema')
 const Training = require('../model/trainingSchema')
 
+const { ERROR } = require('../constants/shared/error')
+const { SUCCESS } = require('../constants/shared/success')
+
 const getTimesheet = async (req, res) => {
   try{
     const findTimesheet = await Timesheet.find()
 
     res.status(200).json({
-      status: 'success',
+      status: SUCCESS.RESPONSES.SUCCESS,
       results: findTimesheet.length,
       data: {
         findTimesheet,
@@ -14,8 +17,8 @@ const getTimesheet = async (req, res) => {
     })
   }catch (err){
     res.status(404).json({
-      status: 'fail',
-      message: err
+      status: ERROR.API_ERROR_404,
+      message: err.message,
     })
   }
 }
@@ -25,15 +28,15 @@ const postTimesheet = async (req, res) => {
     const newTimesheet = await Timesheet.create(req.body);
 
     res.status(201).json({
-      status: 'success',
+      status: SUCCESS.RESPONSES.CREATE,
       data: {
         timesheet: newTimesheet,
       },
     });
   }catch (err){
     res.status(404).json({
-      status: 'fail',
-      message: err,
+      status: ERROR.API_ERROR_404,
+      message: err.message,
     })
   }
 };
@@ -43,18 +46,18 @@ const updateTimesheet = async (req, res) => {
     const timesheet = await Timesheet.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
-    });
+    })
 
     res.status(200).json({
-      status: 'success',
+      status: SUCCESS.RESPONSES.UPDATE,
       data: {
         timesheet
       }
     });
   }catch (err){
     res.status(404).json({
-      status: 'fail',
-      message: err
+      status: ERROR.API_ERROR_404,
+      message: err.message,
     });
   };
 };
@@ -64,13 +67,13 @@ const deleteTimesheet = async(req, res) => {
     await Timesheet.findByIdAndDelete(req.params.id)
 
     res.status(201).json({
-      status: 'deleted',
+      status: SUCCESS.RESPONSES.DELETE,
       data: null
     })
   }catch (err){
     res.status(404).json({
-      status: 'fail',
-      message: err
+      status: ERROR.API_ERROR_404,
+      message: err.message,
     })
   }
 }
