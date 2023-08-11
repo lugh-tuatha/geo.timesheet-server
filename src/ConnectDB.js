@@ -1,4 +1,4 @@
-const DBConfig = require('../services/shared/config-service').getConf('DB')
+const DBConfig = require('./services/shared/config-service').getConf('DB')
 
 const mongoose = require('mongoose');
 

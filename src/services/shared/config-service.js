@@ -1,4 +1,4 @@
-const path = `../../config/${process.env.NODE_ENV || 'development'}`
+const path = `../../../config/${process.env.NODE_ENV || 'development'}`
 const DBConfig = require(`${path}/DBconfig`)
 
 function getConf(conf){
