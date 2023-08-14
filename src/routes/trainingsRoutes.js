@@ -2,17 +2,17 @@ const express = require("express");
 const router = express.Router();
 const {
   getTrainings,
-  postTrainings,
-  deleteTrainings,
-  updateTrainings,
+  postTraining,
+  deleteTraining,
+  updateTraining,
 } = require("../controllers/trainingsController");
 
 router.get("/", getTrainings);
 
-router.post("/", postTrainings);
+router.post("/", postTraining);
 
-router.patch("/:id", updateTrainings)
+router.patch("/:id", updateTraining)
 
-router.delete("/:id", deleteTrainings);
+router.delete("/:id", deleteTraining);
 
 module.exports = router;

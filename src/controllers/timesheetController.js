@@ -4,6 +4,9 @@ const Training = require('../model/trainingSchema')
 const { ERROR } = require('../constants/shared/error')
 const { SUCCESS } = require('../constants/shared/success')
 
+// @desc   Get Timesheet
+// @route  GET /geo/api/v1/timesheet
+// @access Public
 const getTimesheet = async (req, res) => {
   try{
     const findTimesheet = await Timesheet.find()
@@ -23,6 +26,9 @@ const getTimesheet = async (req, res) => {
   }
 }
 
+// @desc   Create Timesheet
+// @route  POST /geo/api/v1/timesheet
+// @access Public
 const postTimesheet = async (req, res) => {
   try{
     const newTimesheet = await Timesheet.create(req.body);
@@ -41,6 +47,9 @@ const postTimesheet = async (req, res) => {
   }
 };
 
+// @desc   Update Timesheet
+// @route  PATCH /geo/api/v1/timesheet/:id
+// @access Public
 const updateTimesheet = async (req, res) => {
   try{
     const timesheet = await Timesheet.findByIdAndUpdate(req.params.id, req.body, {
@@ -62,6 +71,9 @@ const updateTimesheet = async (req, res) => {
   };
 };
 
+// @desc   Delete Timesheet
+// @route  DELETE /geo/api/v1/timesheet/:id
+// @access Public
 const deleteTimesheet = async(req, res) => {
   try{
     await Timesheet.findByIdAndDelete(req.params.id)

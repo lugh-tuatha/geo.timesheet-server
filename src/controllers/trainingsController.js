@@ -4,6 +4,9 @@ const Training = require('../model/trainingSchema')
 const { ERROR } = require('../constants/shared/error')
 const { SUCCESS } = require('../constants/shared/success')
 
+// @desc   Get Training
+// @route  GET /geo/api/v1/trainings
+// @access Public
 const getTrainings = async (req, res) => {
   try{
     const findTrainings = await Training.find();
@@ -23,7 +26,10 @@ const getTrainings = async (req, res) => {
   }
 };
 
-const postTrainings = async (req, res) => {
+// @desc   Create Training
+// @route  POST /geo/api/v1/trainings
+// @access Public
+const postTraining = async (req, res) => {
   try{
     const newTraining = await Training.create(req.body);
 
@@ -41,7 +47,10 @@ const postTrainings = async (req, res) => {
   }
 };
 
-const updateTrainings = async (req, res) => {
+// @desc   Update Training
+// @route  PATCH /geo/api/v1/trainings/:id
+// @access Public
+const updateTraining = async (req, res) => {
   try{
     const training = await Training.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -62,7 +71,10 @@ const updateTrainings = async (req, res) => {
   };
 }
 
-const deleteTrainings = async (req, res) => {
+// @desc   Delete Training
+// @route  DELETE /geo/api/v1/trainings/:id
+// @access Public
+const deleteTraining = async (req, res) => {
   try{
     await Training.findByIdAndDelete(req.params.id);
 
@@ -80,7 +92,7 @@ const deleteTrainings = async (req, res) => {
 
 module.exports = {
   getTrainings,
-  postTrainings,
-  deleteTrainings,
-  updateTrainings,
+  postTraining,
+  deleteTraining,
+  updateTraining,
 };
