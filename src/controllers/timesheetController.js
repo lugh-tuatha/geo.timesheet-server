@@ -1,5 +1,4 @@
 const Timesheet = require('../model/timesheetSchema')
-const Training = require('../model/trainingSchema')
 
 const { ERROR } = require('../constants/shared/error')
 const { SUCCESS } = require('../constants/shared/success')
