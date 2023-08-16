@@ -20,11 +20,7 @@ app.post("/api/login", (req, res) => {
   res.redirect("http://localhost:4200/timesheet/");
 });
 
-app.use("/geo/api/v1/trainings", require("./routes/trainingsRoutes"));
-
-app.use("/geo/api/v1/timesheet", require('./routes/timesheetRoutes'))
-
-app.use("/geo/api/apptivo/work-orders", require('./routes/apptivoApiRoutes'))
+app.use("/geo/api", require("./routes/router"))
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
