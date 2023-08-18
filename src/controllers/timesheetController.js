@@ -13,7 +13,7 @@ const getTimesheet = async (req, res) => {
       status: SUCCESS.RESPONSES.SUCCESS,
       results: findTimesheet.length,
       data: {
-        findTimesheet,
+        timesheet: findTimesheet,
       }
     })
   }catch (err){

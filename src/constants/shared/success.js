@@ -3,6 +3,7 @@ module.exports.SUCCESS = {
 		SUCCESS: "Success!",
 		CREATE: "Created successfully!",
 		UPDATE: "Updated successfully!",
+		RETRIEVAL: "Retrieval successful!",
 		DELETE: "Deleted successfully!",
 	}	
 }

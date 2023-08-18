@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { SUCCESS } = require('../constants/shared/success');
 
 // @desc   Get Apptivo api data
 // @route  GET /geo/api/apptivo/work-orders
@@ -16,7 +17,7 @@ const getApptivoApi = async (req, res) => {
     }));
     
     res.status(200).json({
-      status: 'success',
+      status: SUCCESS.RESPONSES.RETRIEVAL,
       results: filteredData.length,
       response: filteredData
     });
