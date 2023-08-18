@@ -9,7 +9,7 @@ const { SUCCESS } = require('../constants/shared/success');
 const getTotalHours = async (req, res) => {
   try{
     const findTotalHours = await TotalHours.find()
-    res.status(200).json({
+    res.status(SUCCESS.RESPONSE_CODES.C_200).json({
       status: SUCCESS.RESPONSES.SUCCESS,
       results: findTotalHours.length,
       data: {
