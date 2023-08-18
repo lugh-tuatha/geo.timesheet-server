@@ -4,7 +4,7 @@ const axios = require('axios');
 // @route  GET /geo/api/apptivo/work-orders
 // @access Public
 const getApptivoApi = async (req, res) => {
-  const apptivoLinks = `https://api.apptivo.com/app/dao/v6/workorders?a=getAll&iDisplayLength=50&apiKey=${process.env.APPTIVO_API_KEY}&accessKey=${process.env.APPTIVO_ACCESS_KEY}`;
+  const apptivoLinks = `https://api.apptivo.com/app/dao/v6/workorders?a=getAll&numRecords=1000&apiKey=${process.env.APPTIVO_API_KEY}&accessKey=${process.env.APPTIVO_ACCESS_KEY}`
 
   try { 
     const response = await axios.get(apptivoLinks);

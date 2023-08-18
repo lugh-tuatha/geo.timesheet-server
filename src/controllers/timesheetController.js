@@ -9,7 +9,6 @@ const { SUCCESS } = require('../constants/shared/success')
 const getTimesheet = async (req, res) => {
   try{
     const findTimesheet = await Timesheet.find()
-
     res.status(200).json({
       status: SUCCESS.RESPONSES.SUCCESS,
       results: findTimesheet.length,
