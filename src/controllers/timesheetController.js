@@ -49,8 +49,11 @@ const postTimesheet = async (req, res) => {
 // @route  PATCH /geo/api/v1/timesheet/:id
 // @access Public
 const updateTimesheet = async (req, res) => {
+  const id = req.params.id;
+  const updatedData  = req.body;
+
   try{
-    const timesheet = await Timesheet.findByIdAndUpdate(req.params.id, req.body, {
+    const timesheet = await Timesheet.findByIdAndUpdate(id, updatedData, {
       new: true,
       runValidators: true,
     })
@@ -88,9 +91,31 @@ const deleteTimesheet = async(req, res) => {
   }
 }
 
+// @desc   Get Timesheet by id
+// @route  GET /geo/api/v1/timesheet/:id
+// @access Public
+const getTimesheetById = async(req, res) => {
+  try{
+    const timesheet = await Timesheet.findById(req.params.id)
+
+    res.status(201).json({
+      status: SUCCESS.RESPONSES.SUCCESS,
+      data: {
+        timesheet
+      }
+    })
+  }catch (err){
+    res.status(404).json({
+      status: ERROR.API_ERROR_404,
+      message: err.message,
+    })
+  }
+}
+
 module.exports = {
   getTimesheet,
   postTimesheet,
   updateTimesheet,
   deleteTimesheet,
+  getTimesheetById
 }

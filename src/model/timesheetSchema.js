@@ -1,26 +1,15 @@
 const { default: mongoose } = require("mongoose")
 
 const timesheetSchema = new mongoose.Schema({
-  isChecked: Boolean,
-  approvedBy: String,
-  isOT: Boolean,
-  isND: Boolean,
-  date: {
-    type: String,
-    default: '08/09/23',
-  },
-  location: {
-    type: String,
-    default: 'OFC-DW',
-  },
-  project: {
-    type: String,
-    default: 'GEO',
-  },
-  task: String,
-  actualHours: Number,
-  projectDescription: String,
-  weekNo: Number,
+  projects: String,
+  mon: String,
+  tue: String,
+  wed: String,
+  thu: String,
+  fri: String,
+  sat: String,
+  sun: String,
+  total: String,
 })
 
 const Timesheet = mongoose.model('Timesheet', timesheetSchema);
